@@ -22,6 +22,14 @@
 
   rwt.dropdown.DropDown.prototype = {
 
+    setVisibility : function( value ) {
+      if( value ) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    },
+
     show : function() {
       checkDisposed( this );
       var yOffset = this._.linkedControl.getHeight();
@@ -47,6 +55,10 @@
 
     isDisposed : function() {
       return this._ === null;
+    },
+
+    toString : function() {
+      return "DropDown";
     }
 
   };

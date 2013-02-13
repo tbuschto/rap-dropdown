@@ -19,7 +19,11 @@ import org.eclipse.rap.rwt.client.service.JavaScriptLoader;
 
 public final class DropDownResources {
 
-  public static final String DROP_DOWN_JS = "DropDown.js";
+  public static final String[] SCRIPTS = new String[] {
+    "DropDown.js",
+    "DropDownHandler.js"
+  };
+
   private static final String LOCAL_PATH = "rwt/dropdown/";
 
   public static void ensure() {
@@ -28,7 +32,7 @@ public final class DropDownResources {
   }
 
   private static void ensureRegistered() {
-    if( !RWT.getResourceManager().isRegistered( DROP_DOWN_JS ) ) {
+    if( !RWT.getResourceManager().isRegistered( SCRIPTS[ 0 ] ) ) {
       try {
         register();
       } catch( IOException exception ) {
@@ -38,16 +42,20 @@ public final class DropDownResources {
   }
 
   private static void ensureLoaded() {
-    JavaScriptLoader loader = RWT.getClient().getService( JavaScriptLoader.class );
-    loader.require( RWT.getResourceManager().getLocation( DROP_DOWN_JS ) );
+    for( String script : SCRIPTS ) {
+      JavaScriptLoader loader = RWT.getClient().getService( JavaScriptLoader.class );
+      loader.require( RWT.getResourceManager().getLocation( script ) );
+    }
   }
 
   private static void register() throws IOException {
-    InputStream inputStream = getResourceAsStream( DROP_DOWN_JS );
-    try {
-      RWT.getResourceManager().register( DROP_DOWN_JS, inputStream );
-    } finally {
-      inputStream.close();
+    for( String script : SCRIPTS ) {
+      InputStream inputStream = getResourceAsStream( script );
+      try {
+        RWT.getResourceManager().register( script, inputStream );
+      } finally {
+        inputStream.close();
+      }
     }
   }
 

@@ -26,7 +26,7 @@ public class DropDownResourcesContribution implements TestContribution {
 
   @Override
   public String[] getResources() {
-    return new String[] { DropDownResources.DROP_DOWN_JS };
+    return DropDownResources.SCRIPTS;
   }
 
   @Override

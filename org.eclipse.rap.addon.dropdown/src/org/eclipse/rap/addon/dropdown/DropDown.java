@@ -11,6 +11,7 @@
 
 package org.eclipse.rap.addon.dropdown;
 
+import org.eclipse.rap.addon.dropdown.internal.resources.DropDownResources;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.lifecycle.WidgetUtil;
 import org.eclipse.rap.rwt.remote.RemoteObject;
@@ -27,6 +28,7 @@ public class DropDown {
   private boolean disposed = false;
 
   public DropDown( Control control ) {
+    DropDownResources.ensure();
     remoteObject = RWT.getUISession().getConnection().createRemoteObject( REMOTE_TYPE );
     remoteObject.set( "linkedControl", WidgetUtil.getId( control ) );
     control.addListener( SWT.Dispose, new Listener() {
