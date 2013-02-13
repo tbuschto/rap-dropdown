@@ -18,6 +18,8 @@
     this._ = {};
     this._.popup = createPopup();
     this._.linkedControl = linkedControl;
+    linkedControl.addEventListener( "appear", onAppear, this );
+    this._.visibility = false;
   };
 
   rwt.dropdown.DropDown.prototype = {
@@ -32,14 +34,18 @@
 
     show : function() {
       checkDisposed( this );
-      var yOffset = this._.linkedControl.getHeight();
-      this._.popup.positionRelativeTo( this._.linkedControl, 0, yOffset );
-      this._.popup.setWidth( this._.linkedControl.getWidth() );
-      this._.popup.show();
+      this._.visibility = true;
+      if( this._.linkedControl.isCreated() ) {
+        var yOffset = this._.linkedControl.getHeight();
+        this._.popup.positionRelativeTo( this._.linkedControl, 0, yOffset );
+        this._.popup.setWidth( this._.linkedControl.getWidth() );
+        this._.popup.show();
+      }
     },
 
     hide : function() {
       checkDisposed( this );
+      this._.visibility = false;
       this._.popup.hide();
     },
 
@@ -61,6 +67,12 @@
       return "DropDown";
     }
 
+  };
+
+  var onAppear = function() {
+    if( this._.visibility ) {
+      this.show();
+    }
   };
 
   var createPopup = function() {

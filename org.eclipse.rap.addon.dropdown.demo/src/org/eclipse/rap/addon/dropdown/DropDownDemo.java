@@ -20,15 +20,24 @@ public class DropDownDemo extends AbstractEntryPoint {
   @Override
   protected void createContents( Composite parent ) {
     getShell().setLayout( new GridLayout( 2, false ) );
+    createText( parent );
+    createTestControls( new Composite( parent, SWT.NONE ) );
+  }
+
+  private void createText( Composite parent ) {
     text = new Text( parent, SWT.BORDER );
     GridData gridData = new GridData( 200, 23 );
     gridData.verticalAlignment = SWT.TOP;
     text.setLayoutData( gridData );
     dropdown = new DropDown( text );
-    createTestControls( new Composite( parent, SWT.NONE ) );
+    text.addListener( SWT.Modify, new Listener() {
+      public void handleEvent( Event event ) {
+        dropdown.show();
+      }
+    } );
   }
 
-  private void createTestControls( Composite parent ) {
+  private void createTestControls( final Composite parent ) {
     parent.setLayoutData( new GridData( 400, 400 ) );
     parent.setLayout( new RowLayout() );
     createButton( parent, "show", new Listener() {
@@ -39,6 +48,15 @@ public class DropDownDemo extends AbstractEntryPoint {
     createButton( parent, "hide", new Listener() {
       public void handleEvent( Event event ) {
         dropdown.hide();
+      }
+    } );
+    createButton( parent, "recreate", new Listener() {
+      public void handleEvent( Event event ) {
+        text.dispose();
+        createText( parent.getParent() );
+        text.moveAbove( parent );
+        dropdown.show();
+        getShell().layout();
       }
     } );
   }
