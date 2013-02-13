@@ -11,8 +11,16 @@
 
 package org.eclipse.rap.addon.dropdown;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import org.eclipse.rap.rwt.lifecycle.PhaseId;
+import org.eclipse.rap.rwt.lifecycle.WidgetUtil;
+import org.eclipse.rap.rwt.remote.Connection;
+import org.eclipse.rap.rwt.remote.RemoteObject;
 import org.eclipse.rap.rwt.testfixture.Fixture;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -28,6 +36,8 @@ public class DropDown_Test {
   private Display display;
   private Text text;
   private DropDown dropdown;
+  private RemoteObject remoteObject;
+  private Connection connection;
 
   @Before
   public void setUp() {
@@ -36,6 +46,10 @@ public class DropDown_Test {
     Shell shell = new Shell( display );
     text = new Text( shell, SWT.NONE );
     Fixture.fakeNewRequest();
+    remoteObject = mock( RemoteObject.class );
+    connection = mock( Connection.class );
+    when( connection.createRemoteObject( anyString() ) ).thenReturn( remoteObject );
+    Fixture.fakeConnection( connection );
     dropdown = new DropDown( text );
   }
 
@@ -45,8 +59,61 @@ public class DropDown_Test {
   }
 
   @Test
-  public void testCreateInstance() {
-    assertTrue( dropdown instanceof DropDown );
+  public void testContructor_CreatesRemoteObjectWithCorrentType() {
+    verify( connection ).createRemoteObject( "rwt.dropdown.DropDown" );
   }
 
+  @Test
+  public void testContructor_SetsReferenceWidget() {
+    verify( remoteObject ).set( "linkedControl", WidgetUtil.getId( text ) );
+  }
+
+  @Test
+  public void testDipose_RendersDetroy() {
+    dropdown.dispose();
+    verify( remoteObject ).destroy();
+  }
+
+  @Test
+  public void testDipose_CalledOnControlDispose() {
+    Fixture.fakePhase( PhaseId.PROCESS_ACTION );
+
+    text.dispose();
+
+    verify( remoteObject ).destroy();
+  }
+
+  @Test
+  public void testShow_RendersVisibilityTrue() {
+    dropdown.show();
+    verify( remoteObject ).set( "visibility", true );
+  }
+
+  @Test
+  public void testShow_ThrowsExceptionIfDisposed() {
+    dropdown.dispose();
+    try {
+      dropdown.show();
+      fail();
+    } catch( IllegalStateException ex ) {
+      // expected
+    }
+  }
+
+  @Test
+  public void testHide_RendersVisibilityFalse() {
+    dropdown.hide();
+    verify( remoteObject ).set( "visibility", false );
+  }
+
+  @Test
+  public void testHide_ThrowsExceptionIfDisposed() {
+    dropdown.dispose();
+    try {
+      dropdown.hide();
+      fail();
+    } catch( IllegalStateException ex ) {
+      // expected
+    }
+  }
 }
