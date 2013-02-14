@@ -35,7 +35,7 @@
     show : function() {
       checkDisposed( this );
       this._.visibility = true;
-      if( this._.linkedControl.isCreated() ) {
+      if( this._.linkedControl.isCreated() && !this._.popup.isSeeable() ) {
         var yOffset = this._.linkedControl.getHeight();
         this._.popup.positionRelativeTo( this._.linkedControl, 0, yOffset );
         this._.popup.setWidth( this._.linkedControl.getWidth() );

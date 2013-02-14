@@ -30,11 +30,6 @@ public class DropDownDemo extends AbstractEntryPoint {
     gridData.verticalAlignment = SWT.TOP;
     text.setLayoutData( gridData );
     dropdown = new DropDown( text );
-    text.addListener( SWT.Modify, new Listener() {
-      public void handleEvent( Event event ) {
-        dropdown.show();
-      }
-    } );
   }
 
   private void createTestControls( final Composite parent ) {
@@ -59,11 +54,30 @@ public class DropDownDemo extends AbstractEntryPoint {
         getShell().layout();
       }
     } );
+    createButton( parent, "server listener", new Listener() {
+      public void handleEvent( Event event ) {
+        text.addListener( SWT.Modify, new Listener() {
+          public void handleEvent( Event event ) {
+            dropdown.show();
+          }
+        } );
+      }
+    } );
+    createButton( parent, "client listener", new Listener() {
+      public void handleEvent( Event event ) {
+//        String script = wrapScript( "rap.getObject( " + )
+//        ClientListener clientListener = new ClientListener( scriptCode );
+      }
+    } );
   }
 
-  private void createButton( Composite composite, String text, Listener listener ) {
+  private static void createButton( Composite composite, String text, Listener listener ) {
     Button show = new Button( composite, SWT.PUSH );
     show.setText( text );
     show.addListener( SWT.Selection, listener);
+  }
+
+  private static String wrapScript( String script ) {
+    return "function handleEvent( event ){\n" + script + "}";
   }
 }
