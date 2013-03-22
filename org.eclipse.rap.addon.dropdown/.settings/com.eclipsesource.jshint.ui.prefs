@@ -1,5 +1,0 @@
-eclipse.preferences.version=1
-globals=rwt\:false, rap\:false
-included=//*.js
-options=curly\: true, immed\: true, newcap\: true, eqnull\: true, shadow\: true, funcscope\: true, undef\: true, browser\: true, laxbreak\: true, evil\:true, onecase\:true, sub\:true, delete\:false
-projectSpecificOptions=true
