@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-
 public class DropDown {
 
   private static final String REMOTE_TYPE = "rwt.dropdown.DropDown";
