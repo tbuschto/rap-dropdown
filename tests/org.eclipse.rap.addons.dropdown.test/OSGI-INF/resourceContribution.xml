@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.eclipse.rap.addon.dropdown.test.resources">
-   <implementation class="org.eclipse.rap.addon.dropdown.internal.DropDownResourcesContribution"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.eclipse.rap.addons.dropdown.test.resources">
+   <implementation class="org.eclipse.rap.addons.dropdown.internal.DropDownResourcesContribution"/>
    <service>
       <provide interface="org.eclipse.rap.rwt.jstest.TestContribution"/>
    </service>

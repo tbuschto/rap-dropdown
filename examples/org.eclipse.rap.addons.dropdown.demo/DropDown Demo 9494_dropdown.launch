@@ -44,5 +44,5 @@
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
-<stringAttribute key="workspace_bundles" value="org.eclipse.rap.addon.dropdown.demo@default:default,org.eclipse.rap.addon.dropdown@default:default,org.eclipse.rap.clientscripting@default:default,org.eclipse.rap.rwt.osgi@default:default,org.eclipse.rap.rwt@default:default"/>
+<stringAttribute key="workspace_bundles" value="org.eclipse.rap.addons.dropdown.demo@default:default,org.eclipse.rap.addons.dropdown@default:default,org.eclipse.rap.clientscripting@default:default,org.eclipse.rap.rwt.osgi@default:default,org.eclipse.rap.rwt@default:default"/>
 </launchConfiguration>

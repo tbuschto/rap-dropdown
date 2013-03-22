@@ -9,8 +9,9 @@
  *    EclipseSource - initial API and implementation
  ******************************************************************************/
 
-package org.eclipse.rap.addon.dropdown;
+package org.eclipse.rap.addons.dropdown;
 
+import org.eclipse.rap.addons.dropdown.DropDown;
 import org.eclipse.rap.rwt.application.AbstractEntryPoint;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

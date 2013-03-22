@@ -8,7 +8,7 @@
  * Contributors:
  *    EclipseSource - initial API and implementation
  ******************************************************************************/
-package org.eclipse.rap.addon.dropdown.internal.resources;
+package org.eclipse.rap.addons.dropdown.internal.resources;
 
 import java.io.IOException;
 import java.io.InputStream;

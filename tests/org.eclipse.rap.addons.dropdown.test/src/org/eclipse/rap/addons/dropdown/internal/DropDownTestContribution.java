@@ -9,29 +9,37 @@
  *    EclipseSource - initial API and implementation
  ******************************************************************************/
 
-package org.eclipse.rap.addon.dropdown.internal;
+package org.eclipse.rap.addons.dropdown.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.rap.addon.dropdown.internal.resources.DropDownResources;
 import org.eclipse.rap.rwt.jstest.TestContribution;
 
-public class DropDownResourcesContribution implements TestContribution {
+
+public class DropDownTestContribution implements TestContribution {
+
+  private static final ClassLoader CLASSLOADER = DropDownTestContribution.class.getClassLoader();
+
+  private static final String PATH_PREFIX = "/rwt/dropdown/";
+
+  private static final String[] ALL_TEST_RESOURCES = new String[] {
+    "DropDown_Test.js",
+  };
 
   @Override
   public String getName() {
-    return "dropdown-resources";
+    return "dropdown-tests";
   }
 
   @Override
   public String[] getResources() {
-    return DropDownResources.SCRIPTS;
+    return ALL_TEST_RESOURCES;
   }
 
   @Override
   public InputStream getResourceAsStream( String resourceName ) throws IOException {
-    return DropDownResources.getResourceAsStream( resourceName );
+    return CLASSLOADER.getResourceAsStream( PATH_PREFIX + resourceName );
   }
 
 }
