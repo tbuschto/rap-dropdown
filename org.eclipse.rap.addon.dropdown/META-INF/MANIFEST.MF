@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dropdown
-Bundle-SymbolicName: org.eclipse.rap.addon.dropdown
+Bundle-SymbolicName: org.eclipse.rap.addons.dropdown
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ECLIPSESOURCE
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
